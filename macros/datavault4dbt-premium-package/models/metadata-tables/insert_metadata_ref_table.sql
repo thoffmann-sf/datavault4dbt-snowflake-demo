@@ -1,7 +1,6 @@
 {%- macro insert_metadata_ref_table(ref_hub, ref_satellites, src_ldts, src_rsrc, historized, snapshot_trigger_column='is_active', snapshot_relation=none) -%}
-{{ log('Test ob Ref Table Macro Call geht', info=True) }}
     {% set query %}
-        INSERT INTO {{this.database}}.dbt_thoffmannsf_datavault4dbt_premium_package.ref_table_metadata (
+        INSERT INTO {{ get_model_db_name_dict('ref_table_metadata').full_name }} (
         Ref_Table_Name,
         Ref_Hub,
         ref_sats,

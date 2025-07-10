@@ -4,10 +4,8 @@
 {%- if not datavault4dbt.is_something(disable_hwm) -%}
     {%- set disable_hwm = 'FALSE' -%}
 {%- endif -%}
-
-{{ log('Test ob Link Macro Call geht', info=True) }}
     {% set query %}
-        INSERT INTO {{this.database}}.dbt_thoffmannsf_datavault4dbt_premium_package.link_metadata (
+        INSERT INTO {{ get_model_db_name_dict('link_metadata').full_name }} (
             Link_Name,
             Link_Hashkey,
             Foreign_Hashkeys,

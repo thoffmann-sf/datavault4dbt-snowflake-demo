@@ -1,8 +1,6 @@
 {%- macro insert_metadata_pit(tracked_entity, hashkey, sat_names, ldts, ledts, sdts, snapshot_relation, dimension_key, refer_to_ghost_records, snapshot_trigger_column=none, custom_rsrc=none, pit_type=none) -%}
-
-{{ log('Test ob PIT Macro Call geht', info=True) }}
     {% set query %}
-        INSERT INTO {{this.database}}.dbt_thoffmannsf_datavault4dbt_premium_package.pit_metadata (
+        INSERT INTO {{ get_model_db_name_dict('pit_metadata').full_name }} (
         Pit_Name,
         Tracked_Hub,
         Hub_Hashkey,

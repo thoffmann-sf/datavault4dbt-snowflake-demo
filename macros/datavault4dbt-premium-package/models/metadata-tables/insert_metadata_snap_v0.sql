@@ -1,7 +1,6 @@
 {%- macro insert_metadata_snap_v0(start_date, daily_snapshot_time, sdts_alias, end_date=none) -%}
-{{ log('Test ob Snap V0 Macro Call geht', info=True) }}
     {% set query %}
-        INSERT INTO {{this.database}}.dbt_thoffmannsf_datavault4dbt_premium_package.snap_v0_metadata (
+        INSERT INTO {{ get_model_db_name_dict('snap_v0_metadata').full_name }} (
         Snap_name,
         start_date,
         daily_snapshot_time,

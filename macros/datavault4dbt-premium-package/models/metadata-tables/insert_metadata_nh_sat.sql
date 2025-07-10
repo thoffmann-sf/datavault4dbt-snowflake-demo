@@ -1,8 +1,6 @@
 {%- macro insert_metadata_nh_sat(parent_hashkey, src_payload, src_ldts, src_rsrc, source_model, source_is_single_batch) -%}
-
-{{ log('Test ob NH Sat Macro Call geht', info=True) }}
     {% set query %}
-        INSERT INTO {{this.database}}.dbt_thoffmannsf_datavault4dbt_premium_package.nh_sat_metadata (
+        INSERT INTO {{ get_model_db_name_dict('nh_sat_metadata').full_name }} (
         Sat_Name,
         Parent_Hashkey,
         Payload,

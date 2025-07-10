@@ -5,9 +5,8 @@
     {%- set foreign_hashkeys = [] -%}
 {%- endif -%}
 
-{{ log('Test ob NH Link Macro Call geht', info=True) }}
     {% set query %}
-        INSERT INTO {{this.database}}.dbt_thoffmannsf_datavault4dbt_premium_package.nh_link_metadata (
+        INSERT INTO {{ get_model_db_name_dict('nh_link_metadata').full_name }} (
         Link_Name,
         Link_Hashkey,
         Foreign_Hashkeys,

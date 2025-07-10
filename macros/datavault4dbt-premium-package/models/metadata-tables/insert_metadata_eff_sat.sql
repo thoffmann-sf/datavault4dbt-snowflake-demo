@@ -1,8 +1,6 @@
 {%- macro insert_metadata_eff_sat(source_model, tracked_hashkey, src_ldts, src_rsrc, is_active_alias, source_is_single_batch, disable_hwm) -%}
-
-{{ log('Test ob EFF Macro Call geht', info=True) }}
     {% set query %}
-        INSERT INTO {{this.database}}.dbt_thoffmannsf_datavault4dbt_premium_package.eff_sat_metadata (
+        INSERT INTO {{ get_model_db_name_dict('eff_sat_metadata').full_name }} (
             Sat_Name,
             Tracked_Hashkey,
             source_model,

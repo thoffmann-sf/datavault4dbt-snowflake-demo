@@ -79,6 +79,8 @@ vars:
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
 
+on-run-end: "{{ datavault4dbt_snowflake_demo.insert_metadata_global_vars() }}"
+
 # dbt will attempt to create the schemas based on the values defined below.
 # If this is not desired you can remove the whole below block.
 # dbt will then only use the target schema as defined in the profiles.yml

@@ -1,8 +1,7 @@
 {%- macro insert_metadata_hub(hashkey, business_keys, src_ldts, src_rsrc, source_models, disable_hwm) -%}
 {%- set json_source_models = tojson(source_models) -%}
-{{ log('Test ob Hub Macro Call geht', info=True) }}
     {% set query %}
-        INSERT INTO {{this.database}}.dbt_thoffmannsf_datavault4dbt_premium_package.hub_metadata (
+        INSERT INTO {{ get_model_db_name_dict('hub_metadata').full_name }} (
             Hub_Name,
             Hub_Hashkey,
             Business_keys,

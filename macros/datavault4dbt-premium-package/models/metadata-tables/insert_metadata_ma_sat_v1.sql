@@ -1,8 +1,6 @@
 {%- macro insert_metadata_ma_sat_v1(sat_v0, hashkey, hashdiff, ma_attribute, src_ldts, src_rsrc, ledts_alias, add_is_current_flag) -%}
-
-{{ log('Test ob MA Sat V1 Macro Call geht', info=True) }}
     {% set query %}
-        INSERT INTO {{this.database}}.dbt_thoffmannsf_datavault4dbt_premium_package.ma_sat_v1_metadata (
+        INSERT INTO {{ get_model_db_name_dict('ma_sat_v1_metadata').full_name }} (
             Sat_Name,
             Sat_v0,
             Parent_Hashkey,

@@ -1,8 +1,7 @@
 {%- macro insert_metadata_rec_sat(tracked_hashkey, source_models, src_ldts, src_rsrc, src_stg, disable_hwm) -%}
 {%- set json_source_models = tojson(source_models) -%}
-{{ log('Test ob Rec Sat Macro Call geht', info=True) }}
     {% set query %}
-        INSERT INTO {{this.database}}.dbt_thoffmannsf_datavault4dbt_premium_package.rec_sat_metadata (
+        INSERT INTO {{ get_model_db_name_dict('rec_sat_metadata').full_name }} (
         Sat_Name,
         Tracked_Hashkey,
         source_models,

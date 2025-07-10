@@ -1,8 +1,7 @@
 {%- macro insert_metadata_snap_v1(control_snap_v0, log_logic, sdts_alias) -%}
 {%- set json_log_logic = tojson(log_logic) -%}
-{{ log('Test ob Snap V1 Macro Call geht', info=True) }}
     {% set query %}
-        INSERT INTO {{this.database}}.dbt_thoffmannsf_datavault4dbt_premium_package.snap_v1_metadata (
+        INSERT INTO {{ get_model_db_name_dict('snap_v1_metadata').full_name }} (
         Snap_name,
         control_snap_v0,
         log_logic,
