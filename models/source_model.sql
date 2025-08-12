@@ -1,0 +1,1 @@
+SELECT {{ get_source_models_hub('customer_h') }} as test from {{ ref('hub_metadata') }}

@@ -37,11 +37,4 @@ vars:
 # dbt will then only use the target schema as defined in the profiles.yml
 models:
   datavault4dbt_snowflake_demo:
-    business_vault:
-      +schema: core
-    control:
-      +schema: control
-    raw_vault:
-      +schema: core
-    stages:
-      +schema: stages
+

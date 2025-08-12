@@ -1,4 +1,4 @@
-SELECT
+SELECT DISTINCT
     hub.hub_name,
     hub.hub_hashkey,
     sat.sat_name,

@@ -1,0 +1,1 @@
+SELECT {{get_hashed_column_values('stg_lineitem', 'hk_lineitem_nl')}} as test from {{ ref('stage_metadata') }}
