@@ -28,6 +28,8 @@ with source_models as (
 )
 ,
 
+
+
 final_output as (
     SELECT
         hub_name,
@@ -59,7 +61,7 @@ final_output as (
 
 SELECT 
 *
-FROM final_output
+    FROM final_output
 WHERE business_keys!=hashkey_input
 
 
