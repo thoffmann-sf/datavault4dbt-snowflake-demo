@@ -1,4 +1,4 @@
-{# -- depends_on: {{ ref('link_metadata') }}, {{ ref('hub_metadata') }}
+-- depends_on: {{ ref('link_metadata') }}, {{ ref('hub_metadata') }}
 
 {% set link_query %}
     SELECT link_name, link_hashkey, foreign_hashkeys
@@ -74,15 +74,7 @@ with final_data as (
 )
 
 select * from final_data
-order by link_name, foreign_hashkey #}
+where foreign_hashkey!=hub_hashkey
+order by link_name, foreign_hashkey 
 
 
-
-SELECT link_name,
-       link_hashkey,
-       foreign_hashkey,
-       hub_name,
-       hub_hashkey
-    from {{ ref('link_metadata') }}
-    left join {{ ref('hub_metadata') }}
-    on link_metadata.foreign_hashkeys = hub_metadata.hub_hashkey
