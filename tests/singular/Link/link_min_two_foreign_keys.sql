@@ -15,7 +15,7 @@
     {% set link_name = row[0] | trim %}
     {% set foreign_hashkeys_string = row[1] | trim %}
     
-    {% set foreign_hashkeys = foreign_hashkeys_string.split(', ') %}
+    {% set foreign_hashkeys = foreign_hashkeys_string.split(', ') | map('trim') %}
 
     {% if foreign_hashkeys | length < 2 %}
       {% do failing_links.append({'link_name': link_name, 'fk_count': foreign_hashkeys | length}) %}
