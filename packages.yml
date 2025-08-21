@@ -3,4 +3,4 @@ packages:
     revision: premium_package
   - package: dbt-labs/dbt_utils
     version: 1.3.0
-  - local: "C:/Users/tderksen_scalefree/Projects/dv4dbt-premium/datavault4dbt-premium-package"
+  - local: "C:/Users/thoffmann_scalefree/Documents/VSC/datavault4dbt-premium-package"
