@@ -13,6 +13,9 @@
   {% elif dv_entity == 'link' %}
     {% set ref_table = 'link_metadata' %}
     {% set where_column = 'link_name' %}
+  {% elif dv_entity == 'nh_link' %}
+    {% set ref_table = 'nh_link_metadata' %}
+    {% set where_column = 'link_name' %}
   {% else %}
     -- Return an empty list if the dv_entity is not valid.
     {{ return([]) }}
