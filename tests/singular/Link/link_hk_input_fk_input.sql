@@ -15,6 +15,7 @@ For each link:
   SELECT DISTINCT link_name
   FROM {{ ref('link_metadata') }}
   WHERE link_name IS NOT NULL
+  AND invocation_id = get_latest_invocation_id('link_metadata')
 {% endset %}
 
 {% set link_results = run_query(link_query) %}

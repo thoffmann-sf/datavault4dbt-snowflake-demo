@@ -3,6 +3,7 @@
     SELECT DISTINCT foreign_hashkeys
     FROM {{ ref('link_metadata') }}
     WHERE foreign_hashkeys IS NOT NULL
+    AND invocation_id = get_latest_invocation_id('link_metadata')
 {% endset %}
 
 {% set results = run_query(links_query) %}

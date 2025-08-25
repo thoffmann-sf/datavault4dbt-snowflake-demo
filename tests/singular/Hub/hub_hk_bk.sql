@@ -10,11 +10,13 @@
 
     Do this for every entry in the source_models, so just for every dict inside this list
 #}
+{% set latest_id = get_latest_invocation_id('hub_metadata') %}
 
 {% set hub_query %}
     SELECT DISTINCT hub_name
     FROM {{ ref('hub_metadata') }}
     WHERE hub_name IS NOT NULL
+    AND invocation_id = '{{ latest_id }}'
 {% endset %}
 
 {% set hub_results = run_query(hub_query) %}

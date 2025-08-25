@@ -10,13 +10,5 @@
         LIMIT 1
     {% endset %}
 
-    {% set result = run_query(query) %}
-
-    {% if execute and result and result.rows %}
-        {% set latest_invocation_id = result.rows[0][0] %}
-    {% else %}
-        {% set latest_invocation_id = none %}
-    {% endif %}
-
-    {{ return(latest_invocation_id) }}
+    {{ return(query) }}
 {% endmacro %}

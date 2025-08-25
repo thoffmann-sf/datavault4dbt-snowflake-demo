@@ -15,6 +15,7 @@ consider only entries where is_hashdiff = true.
         hashed_columns
     FROM {{ ref('stage_metadata') }}
     WHERE stage_name IS NOT NULL
+    AND invocation_id = get_latest_invocation_id('stage_metadata')
 {% endset %}
 
 {% set stage_results = run_query(stage_query) %}

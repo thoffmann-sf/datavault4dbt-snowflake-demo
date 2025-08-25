@@ -7,7 +7,9 @@ FROM {{ ref('link_metadata') }} AS link
 LEFT JOIN {{ ref('eff_sat_metadata') }} AS eff_sat
 ON link_hashkey=tracked_hashkey
 WHERE eff_sat_name IS NULL 
-AND tracked_hashkey IS NULL 
+AND tracked_hashkey IS NULL
+AND link.invocation_id = get_latest_invocation_id('link_metadata') 
+AND eff_sat.invocation_id = get_latest_invocation_id('eff_sat_metadata')
 
 
 

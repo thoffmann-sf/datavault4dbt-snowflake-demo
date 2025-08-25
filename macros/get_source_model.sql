@@ -4,6 +4,7 @@
 	-- [{"bk_columns": ["n_nationkey"], "hk_column": "hk_nation_h", ...}]
 
 	-- 1. Determine which table to query based on the dv_entity.
+
 	{% set ref_table = '' %}
 	{% set where_column = '' %}
 
@@ -21,11 +22,14 @@
 		{{ return([]) }}
 	{% endif %}
 
+	{% set latest_id = get_latest_invocation_id(ref_table) %}
+
 	-- 2. Construct the query dynamically.
 	{% set query %}
 		SELECT source_models
 		FROM {{ ref(ref_table) }}
 		WHERE {{ where_column }} = '{{ name }}'
+		AND invocation_id = '{{ latest_id }}'
 	{% endset %}
 
 	{% set results = run_query(query) %}

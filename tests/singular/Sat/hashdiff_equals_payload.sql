@@ -12,6 +12,7 @@ then go into the stage and hashed columns, search the hashdiff as a key and comp
     SELECT DISTINCT sat_name,hashdiff,payload,source_model
     FROM {{ ref('sat_v0_metadata') }}
     WHERE sat_name IS NOT NULL
+    AND invocation_id = get_latest_invocation_id('sat_v0_metadata') 
 {% endset %}
 
 {% set sat_results = run_query(sat_query) %}

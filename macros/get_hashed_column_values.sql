@@ -4,6 +4,7 @@
         SELECT hashed_columns
         FROM {{ ref('stage_metadata') }}
         WHERE stage_name = '{{ stage_model }}'
+        AND invocation_id = get_latest_invocation_id('stage_metadata') 
     {% endset %}
 
     {% set results = run_query(query) %}

@@ -3,6 +3,7 @@
   SELECT DISTINCT
     sat_name
   FROM {{ ref('sat_v0_metadata') }}
+  WHERE invocation_id = get_latest_invocation_id('sat_v0_metadata')
 {% endset %}
 
 {% set all_sats_results = run_query(all_sats_query) %}
@@ -11,6 +12,7 @@
   SELECT DISTINCT
     sat_names
   FROM {{ ref('pit_metadata') }}
+  WHERE invocation_id = get_latest_invocation_id('pit_metadata')
 {% endset %}
 
 {% set pit_sats_results = run_query(pit_sats_query) %}

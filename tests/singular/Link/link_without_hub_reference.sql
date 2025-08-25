@@ -5,7 +5,8 @@
     link_name,
     foreign_hashkeys
   FROM {{ ref('link_metadata') }}
-  WHERE foreign_hashkeys IS NOT NULL AND foreign_hashkeys != ''
+  WHERE foreign_hashkeys IS NOT NULL
+	AND invocation_id = get_latest_invocation_id('link_metadata')
 {% endset %}
 
 {% set hub_hashkeys_query %}
