@@ -3,7 +3,6 @@ Look into sat_v0_metadata and get for every sat_name the hashdiff and the payloa
 then go into the stage and hashed columns, search the hashdiff as a key and compare the values sorted with the payload
  #}
 
-
  -- depends_on: {{ ref('stage_metadata') }}
 
 {% test hashdiff_equals_payload(model) %}
@@ -26,20 +25,20 @@ then go into the stage and hashed columns, search the hashdiff as a key and comp
     {% set sat_payload = sat_payload.split(', ') | sort %}
     {% set source_model= sat_row[3]%}
 
-      {{ log("sat_name: " ~ sat_name, true) }}
-      {{ log("sat_hashdiff: " ~ sat_hashdiff, true) }}
-      {{ log("sat_payload: " ~ sat_payload, true) }}
-      {{ log("source_model: " ~ source_model, true) }}
+      {{ log("sat_name: " ~ sat_name, false) }}
+      {{ log("sat_hashdiff: " ~ sat_hashdiff, false) }}
+      {{ log("sat_payload: " ~ sat_payload, false) }}
+      {{ log("source_model: " ~ source_model, false) }}
 
       {% set stage_hashed_columns = get_hashed_column_values(source_model) %}
 
-      {{ log("stage_hashed_columns: " ~ stage_hashed_columns, true) }}
+      {{ log("stage_hashed_columns: " ~ stage_hashed_columns, false) }}
 
       {% if stage_hashed_columns is not none %}
         {# inputs used for building the sat hashkey #}
         {% set sat_hd_input = stage_hashed_columns[sat_hashdiff] %}
         {% set sat_hd_input = sat_hd_input['columns'] | sort %}
-        {{ log("sat_hd_input: " ~ sat_hd_input, true) }}
+        {{ log("sat_hd_input: " ~ sat_hd_input, false) }}
 
         {# compare sat_hk vs combined foreign_hk inputs #}
         {% if sat_hd_input != sat_payload %}

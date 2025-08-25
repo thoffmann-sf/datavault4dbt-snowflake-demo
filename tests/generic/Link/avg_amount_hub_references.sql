@@ -29,8 +29,8 @@
         {% set dummy = total_fks_list.pop() %}
         {% do total_fks_list.append(new_total_fks) %}
 
-        {{ log('fk_count ' ~ fk_count, info=true) }}
-        {{ log('total_fks ' ~ total_fks_list[0], info=true) }}
+        {{ log('fk_count ' ~ fk_count, info=false) }}
+        {{ log('total_fks ' ~ total_fks_list[0], info=false) }}
     {% endfor %}
     {% set total_fks = total_fks_list[0] %}
 {% endif %}
@@ -51,7 +51,7 @@
 {% endif %}
 
 -- DEBUG: Log the calculated average to the terminal
-{{ log("Calculated average foreign keys: " ~ average_fks, info=true) }}
+{{ log("Calculated average foreign keys: " ~ average_fks, info=false) }}
 
 -- 4. Generate the final SQL query based on the test status.
 {% if test_status == 'error' or test_status == 'warn' %}

@@ -34,17 +34,17 @@ For each link:
       {% set link_hashkey = sm_entry['link_hk'] %}
       {% set foreign_hashkeys = sm_entry['fk_columns'] %}
 
-      {{ log("stage_name: " ~ stage_name, true) }}
-      {{ log("link_hashkey: " ~ link_hashkey, true) }}
-      {{ log("foreign_hashkeys: " ~ foreign_hashkeys, true) }}
+      {{ log("stage_name: " ~ stage_name, false) }}
+      {{ log("link_hashkey: " ~ link_hashkey, false) }}
+      {{ log("foreign_hashkeys: " ~ foreign_hashkeys, false) }}
 
       {% set stage_hashed_columns = get_hashed_column_values(stage_name) %}
-      {{ log("stage_hashed_columns: " ~ stage_hashed_columns, true) }}
+      {{ log("stage_hashed_columns: " ~ stage_hashed_columns, false) }}
 
       {% if stage_hashed_columns is not none %}
         {# inputs used for building the link hashkey #}
         {% set link_hk_input = stage_hashed_columns[link_hashkey] | sort %}
-        {{ log("link_hk_input: " ~ link_hk_input, true) }}
+        {{ log("link_hk_input: " ~ link_hk_input, false) }}
 
         {# union of inputs for all foreign hashkeys #}
         {% set combined_fk_input_columns = [] %}
@@ -54,7 +54,7 @@ For each link:
           {% endif %}
         {% endfor %}
         {% set combined_fk_input_columns = combined_fk_input_columns | sort %}
-        {{ log("combined_fk_input_columns: " ~ combined_fk_input_columns, true) }}
+        {{ log("combined_fk_input_columns: " ~ combined_fk_input_columns, false) }}
 
         {# compare link_hk vs combined foreign_hk inputs #}
         {% if link_hk_input != combined_fk_input_columns %}

@@ -6,9 +6,6 @@ consider only entries where is_hashdiff = true.
 -- depends_on: {{ ref('stage_metadata') }}
 
 {% test every_attribute_appears_once_in_hashdiffs(model) %}
-{{
-    config(severity = 'warn')
-}}
 
 {% set stage_query %}
     SELECT DISTINCT
@@ -28,8 +25,8 @@ consider only entries where is_hashdiff = true.
     {% set stage_name = stage_row[0] %}
     {% set hashed_dict = fromjson(stage_row[1]) %}
 
-    {{ log("stage_name: " ~ stage_name, true) }}
-    {{ log("hashed_dict: " ~ hashed_dict, true) }}
+    {{ log("stage_name: " ~ stage_name, false) }}
+    {{ log("hashed_dict: " ~ hashed_dict, false) }}
 
     {# Iterate through all entries in hashed_columns #}
     {% for key, value in hashed_dict.items() %}
