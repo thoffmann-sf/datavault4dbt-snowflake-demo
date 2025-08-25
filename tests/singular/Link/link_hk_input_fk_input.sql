@@ -56,7 +56,7 @@ For each link:
         {# compare link_hk vs combined foreign_hk inputs #}
         {% if link_hk_input != combined_fk_input_columns %}
           {% set error_message = "Mismatched hashkey inputs for link \"" ~ link_name ~ "\" from stage \"" ~ stage_name ~ "\"." %}
-          {% do failing_links.append({
+          {% do failing_links.append({ 
             'link_name': link_name,
             'stage_name': stage_name,
             'link_hashkey': link_hashkey,

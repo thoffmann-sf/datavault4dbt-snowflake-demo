@@ -1,5 +1,3 @@
- 
-
  SELECT DISTINCT
     link.link_name,
     link.link_hashkey,
