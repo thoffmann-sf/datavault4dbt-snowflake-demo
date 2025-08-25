@@ -4,10 +4,10 @@
     #}
 
     {% set query %}
-				SELECT invocation_id
+				(SELECT invocation_id
         FROM {{ ref(ref_table) }}
         ORDER BY execution_timestamp DESC
-        LIMIT 1
+        LIMIT 1 )
     {% endset %}
 
     {{ return(query) }}

@@ -10,13 +10,14 @@
 
     Do this for every entry in the source_models, so just for every dict inside this list
 #}
-{% set latest_id = get_latest_invocation_id('hub_metadata') %}
+
+{% test hub_hk_bk(model) %}
 
 {% set hub_query %}
     SELECT DISTINCT hub_name
     FROM {{ ref('hub_metadata') }}
     WHERE hub_name IS NOT NULL
-    AND invocation_id = '{{ latest_id }}'
+    AND invocation_id = {{ get_latest_invocation_id('hub_metadata') }}
 {% endset %}
 
 {% set hub_results = run_query(hub_query) %}
@@ -34,7 +35,7 @@
             {% set hub_bk_columns = sm_entry['bk_columns'] | sort %}
             {{ log('hub_bk_columns: '~hub_bk_columns, false) }}
             {% set hub_hk_columns = sm_entry['hk_column'] %}
-            {{ log('hub_hk_columns: '~hub_hk_columns, false) %}
+            {{ log('hub_hk_columns: '~hub_hk_columns, false) }}
 
             {% set stage_hashed_columns = get_hashed_column_values(stage_name) %}
             {{ log('stage_hashed_columns: '~stage_hashed_columns, false) }}
@@ -76,3 +77,5 @@
     SELECT NULL as error_message, NULL as hub_name, NULL as stage_name, NULL as hub_hk_columns, NULL as hub_bk_columns, NULL as stage_bk_columns
     WHERE 1=0
 {% endif %}
+
+{% endtest %}

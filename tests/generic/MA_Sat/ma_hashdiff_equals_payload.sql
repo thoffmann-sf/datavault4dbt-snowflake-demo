@@ -1,18 +1,19 @@
 {# 
-Look into sat_v0_metadata and get for every sat_name the hashdiff and the payload of the sat
+Look into ma_sat_v0_metadata and get for every sat_name the hashdiff and the payload of the sat
 then go into the stage and hashed columns, search the hashdiff as a key and compare the values sorted with the payload
  #}
 
 
+
  -- depends_on: {{ ref('stage_metadata') }}
 
-
+{% test ma_hashdiff_equals_payload(model) %}
 
 {% set sat_query %}
     SELECT DISTINCT sat_name,hashdiff,payload,source_model
-    FROM {{ ref('sat_v0_metadata') }}
+    FROM {{ ref('ma_sat_v0_metadata') }}
     WHERE sat_name IS NOT NULL
-    AND invocation_id = get_latest_invocation_id('sat_v0_metadata') 
+    AND invocation_id = {{ get_latest_invocation_id('ma_sat_v0_metadata') }}
 {% endset %}
 
 {% set sat_results = run_query(sat_query) %}
@@ -67,7 +68,7 @@ then go into the stage and hashed columns, search the hashdiff as a key and comp
       '{{ failure['sat_hashdiff'] }}' AS sat_hashdiff,
       '{{ failure['sat_hd_input'] | tojson }}' AS sat_hd_input,
       '{{ failure['sat_payload'] | tojson }}' AS sat_payload
-    FROM {{ ref('sat_v0_metadata') }}
+    FROM {{ ref('ma_sat_v0_metadata') }}
     WHERE sat_name = '{{ failure['sat_name'] }}'
     {% if not loop.last %}
     UNION ALL
@@ -83,3 +84,5 @@ then go into the stage and hashed columns, search the hashdiff as a key and comp
     NULL AS sat_payload
   WHERE 1=0
 {% endif %}
+
+{% endtest %}

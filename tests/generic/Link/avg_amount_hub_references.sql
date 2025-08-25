@@ -1,9 +1,11 @@
+{% test avg_amount_hub_references(model) %}
+
 {% set links_query %}
     -- 1. Get all distinct links and count their foreign hashkeys.
     SELECT DISTINCT foreign_hashkeys
     FROM {{ ref('link_metadata') }}
     WHERE foreign_hashkeys IS NOT NULL
-    AND invocation_id = get_latest_invocation_id('link_metadata')
+    AND invocation_id = {{ get_latest_invocation_id('link_metadata') }}
 {% endset %}
 
 {% set results = run_query(links_query) %}
@@ -68,3 +70,6 @@
     FROM {{ ref('link_metadata') }}
     WHERE 1=0
 {% endif %}
+
+
+{% endtest %}

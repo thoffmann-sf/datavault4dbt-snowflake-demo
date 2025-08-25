@@ -5,6 +5,7 @@ consider only entries where is_hashdiff = true.
 
 -- depends_on: {{ ref('stage_metadata') }}
 
+{% test every_attribute_appears_once_in_hashdiffs(model) %}
 {{
     config(severity = 'warn')
 }}
@@ -15,7 +16,7 @@ consider only entries where is_hashdiff = true.
         hashed_columns
     FROM {{ ref('stage_metadata') }}
     WHERE stage_name IS NOT NULL
-    AND invocation_id = get_latest_invocation_id('stage_metadata')
+    AND invocation_id = {{ get_latest_invocation_id('stage_metadata') }}
 {% endset %}
 
 {% set stage_results = run_query(stage_query) %}
@@ -63,3 +64,6 @@ consider only entries where is_hashdiff = true.
     NULL AS duplicate_column
   WHERE 1=0
 {% endif %}
+
+{% endtest %}
+

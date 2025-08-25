@@ -1,10 +1,12 @@
+{% test link_min_two_foreign_keys(model) %}
+
 {% set link_metadata_query %}
   SELECT DISTINCT
     link_name,
     foreign_hashkeys
   FROM {{ ref('link_metadata') }}
   WHERE foreign_hashkeys IS NOT NULL
-  AND invocation_id = get_latest_invocation_id('link_metadata')
+  AND invocation_id = {{ get_latest_invocation_id('link_metadata') }}
 {% endset %}
 
 {% set results = run_query(link_metadata_query) %}
@@ -42,3 +44,5 @@
     NULL AS fk_count
   WHERE 1=0
 {% endif %}
+
+{% endtest %}

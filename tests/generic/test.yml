@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: hub_metadata
+    data_tests:
+      - hub_eff_sat_existency
+      - hub_hk_bk
+      - hub_sat_coverage
+      - hubs_without_sats
+
+  - name: link_metadata
+    data_tests:
+      - avg_amount_hub_references
+      - link_eff_sat_existency
+      - link_hk_input_fk_input
+      - link_min_two_foreign_keys
+      - link_without_hub_reference
+
+  - name: ma_sat_metadata
+    data_tests:
+      - ma_hashdiff_equals_payload
+
+  - name: nh_link_metadata
+    data_tests:
+      - link_hk_input_fk_input
+
+  - name: sat_metadata
+    data_tests:
+      - hashdiff_equals_payload
+      - sats_not_in_pit
+
+  - name: stage_metadata
+    data_tests:
+      - every_attribute_appears_once_in_hashdiffs

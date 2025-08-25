@@ -1,3 +1,4 @@
+{% test link_without_hub_references(model) %}
 
 {% set link_metadata_query %}
   -- 1. Get all links and their foreign hashkeys from the link_metadata table.
@@ -6,7 +7,7 @@
     foreign_hashkeys
   FROM {{ ref('link_metadata') }}
   WHERE foreign_hashkeys IS NOT NULL
-	AND invocation_id = get_latest_invocation_id('link_metadata')
+	AND invocation_id = {{ get_latest_invocation_id('link_metadata') }}
 {% endset %}
 
 {% set hub_hashkeys_query %}
@@ -69,3 +70,5 @@
     NULL AS foreign_hashkey
   WHERE 1=0
 {% endif %}
+
+{% endtest %}
